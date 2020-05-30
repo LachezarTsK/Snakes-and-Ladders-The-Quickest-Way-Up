@@ -92,7 +92,8 @@ public class Solution {
       if (current == GOAL) {
         return true;
       }
-
+      
+      // Of course (!visited[current]) is also possible but the tiny '!' could be easily overlooked:))
       if (visited[current] == false) {
         visited[current] = true;
 
