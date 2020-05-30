@@ -1,5 +1,3 @@
-package main.snakesAndLadders;
-
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
@@ -7,7 +5,7 @@ import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class SolutionThree {
+public class Solution {
 
   private static final int BOARD_SIZE = 100;
   private static final int START = 1;
@@ -45,12 +43,12 @@ public class SolutionThree {
   }
 
   /**
-   * Searches for the path leading to a win, i.e. begining at START and landing exactly on the
-   * square of the GOAL, with minimum number of rolls of the dice. Possible rolls at each throw:
-   * 1,2,3,4,5,6.
+   * Searches for the path leading to a win, i.e. beginning at START and landing exactly on 
+   * the square of the GOAL, with minimum number of rolls of the dice. 
+   * At each roll, it is possible to have: 1,2,3,4,5,6.
    *
-   * @return A potivie integer, representing minimum number of rolls, if winning is possible.
-   *     Otherwise, it returns -1;
+   * @return A positive integer, representing the minimum number of rolls, if winning is possible.
+   *         Otherwise, it returns -1;
    */
   private static int find_minimumNumberOfRolls_toWin() {
     boolean pathExists = breadthFirstSearch_findPath_withMinimumRolls();
@@ -96,9 +94,13 @@ public class SolutionThree {
         visited[current] = true;
 
         /**
-         * It is essential that the neigbours are visited backwards so that the path from GOAL to
-         * START can be easily traced. Example: 1=>7, 1=>6, 1=>5, 1=>4, 1=>3, 1=>2 instead of 1=>2,
-         * 1=>3, 1=>4, 1=>5, 1=>6, 1=>7
+         * It is essential that the neigbours are visited backwards, so that the path 
+         * with minimum number of rolls from GOAL to START can be easily traced.
+         *
+         * Example: 
+         * 1=>7, 1=>6, 1=>5, 1=>4, 1=>3, 1=>2 
+         * instead of 
+         * 1=>2, 1=>3, 1=>4, 1=>5, 1=>6, 1=>7
          */
         for (int i = nodesAndEdges[current].size() - 1; i >= 0; i--) {
 
@@ -113,12 +115,15 @@ public class SolutionThree {
   }
 
   /**
-   * Initializes the adjacency list that stores the board. It is initialized as a directed graph,
-   * where each node has and edge that lead only to the next 1 to 6 nodes (squares). Example: 1 =>
-   * 7, 6, 5, 4, 3, 2
+   * Initializes the adjacency list that stores the board. 
+   * It is initialized as a directed graph, where each node has and edge 
+   * that leads only to the next 1 to 6 nodes (squares). 
+   * Example: 1 => 7, 6, 5, 4, 3, 2
    *
-   * <p>Values at index '0' are not applied in the solution, so that each index corresponds to a
-   * node (square) value.
+   * Bakcward movement is possible only if the node is a start of a snake.
+   *
+   * Values at index '0' are not applied in the solution, so that each index corresponds
+   * to a node (square) value.
    */
   @SuppressWarnings("unchecked")
   private static void initialize_nodesAndEdges() {
@@ -134,19 +139,28 @@ public class SolutionThree {
   }
 
   /**
-   * Replaces the start nodes of a snake/ladder with the corresponding end nodes of a snake/ladder.
+   * Replaces the start node of a snake/ladder with the corresponding end node of a snake/ladder.
    * The adjacency list of the start node of the snake/ladder is set to null.
    *
-   * <p>Example: start of ladder = 6, end of ladder = 27.
+   * Example: start of ladder = 6, end of ladder = 27.
    *
-   * <p>Before replacement: 1 => 7, 6, 5, 4, 3, 2 2 => 8, 7, 6, 5, 4, 3 3 => 9, 8, 7, 6, 5, 4 4 =>
-   * 10, 9, 8, 7, 6, 5 5 => 11, 10, 9, 8, 7, 6 6 => 12, 11, 10, 9, 8, 7
+   * Before replacement: 
+   * 1 =>  7, 6, 5, 4, 3, 2
+   * 2 =>  8, 7, 6, 5, 4, 3 
+   * 3 =>  9, 8, 7, 6, 5, 4 
+   * 4 => 10, 9, 8, 7, 6, 5 
+   * 5 => 11, 10, 9, 8, 7, 6 
+   * 6 => 12, 11, 10, 9, 8, 7
    *
-   * <p>Before replacement: 1 => 7, 27, 5, 4, 3, 2 2 => 8, 7, 27, 5, 4, 3 3 => 9, 8, 7, 27, 5, 4 4
-   * => 10, 9, 8, 7, 27, 5 5 => 11, 10, 9, 8, 7, 27 6 => null
+   * After replacement: 
+   * 1 =>  7, 27, 5, 4, 3, 2 
+   * 2 =>  8, 7, 27, 5, 4, 3 
+   * 3 =>  9, 8, 7, 27, 5, 4 
+   * 4 => 10, 9, 8, 7, 27, 5 
+   * 5 => 11, 10, 9, 8, 7, 27 
+   * 6 => null
    */
-  private static void replaceNeighbours_with_snakeOrLadder(
-      int start_snakeOrLadder, int end_snakeOrLadder) {
+  private static void replaceNeighbours_with_snakeOrLadder(int start_snakeOrLadder, int end_snakeOrLadder) {
 
     nodesAndEdges[start_snakeOrLadder].clear();
     int neighbour = start_snakeOrLadder - 1;
