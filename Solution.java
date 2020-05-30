@@ -50,7 +50,7 @@ public class Solution {
    * the square of the GOAL, with minimum number of rolls of the dice. 
    * At each roll, it is possible to have: 1,2,3,4,5,6.
    *
-   * @return A positive integer, representing the minimum number of rolls, if winning is possible.
+   * @return A positive integer, representing the minimum number of rolls, if the GOAL can be reached.
    *         Otherwise, it returns -1;
    */
   private static int find_minimumNumberOfRolls_toWin() {
