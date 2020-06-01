@@ -12,7 +12,7 @@ public class Solution {
   private static final int GOAL = 100;
 
   //The adjacency list that stores the graph.
-  private static List[] nodesAndEdges;
+  private static List<Integer>[] nodesAndEdges;
   
   //The map is applied to trace back the path with minimum number of rolls.
   private static Map<Integer, Integer> path;
