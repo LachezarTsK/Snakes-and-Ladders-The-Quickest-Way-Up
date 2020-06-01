@@ -108,9 +108,9 @@ public class Solution {
          */
         for (int i = nodesAndEdges[current].size() - 1; i >= 0; i--) {
 
-          if (visited[(int) nodesAndEdges[current].get(i)] == false) {
-            path.put((int) nodesAndEdges[current].get(i), current);
-            queue.add((int) nodesAndEdges[current].get(i));
+          if (visited[nodesAndEdges[current].get(i)] == false) {
+            path.put(nodesAndEdges[current].get(i), current);
+            queue.add(nodesAndEdges[current].get(i));
           }
         }
       }
